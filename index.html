@@ -4,31 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pernikahan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Arial', sans-serif; text-align: center; padding: 50px; background-color: #fdf6f6; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { color: #d4a373; }
-        .nama-tamu { color: #bc6c25; font-size: 1.5em; font-weight: bold; }
+        body { margin: 0; padding: 20px; background: #fcf8f5; font-family: 'Poppins', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; max-width: 450px; width: 100%; }
+        h1 { font-family: 'Dancing Script', cursive; color: #8b5e3c; font-size: 2.5em; margin: 0; }
+        .names { font-size: 1.5em; color: #555; margin: 10px 0; }
+        .nama-tamu { font-weight: 600; color: #8b5e3c; margin: 20px 0; font-size: 1.2em; }
+        .timer { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
+        .timer div { background: #f9f9f9; padding: 10px; border-radius: 10px; min-width: 50px; }
+        .timer span { display: block; font-size: 0.8em; color: #888; }
+        .btn { display: inline-block; padding: 12px 30px; background: #8b5e3c; color: white; text-decoration: none; border-radius: 25px; transition: 0.3s; }
+        .btn:hover { background: #6f4c30; }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h1>Undangan Pernikahan</h1>
         <p>Kepada Yth,</p>
-        <div class="nama-tamu" id="namaTamu">Tamu Undangan</div>
-        <p>Dengan hormat, kami mengundang Anda untuk hadir di acara kami...</p>
+        <div class="nama-tamu" id="namaTamu">Bapak/Ibu/Saudara/i</div>
+        
+        <p>Kami mengundang Anda di pernikahan kami:</p>
+        <h1>Andi & Bella</h1>
+        <div class="names">Menuju Hari Bahagia</div>
+
+        <div class="timer" id="countdown">
+            <div><span id="days">00</span>Hari</div>
+            <div><span id="hours">00</span>Jam</div>
+            <div><span id="mins">00</span>Menit</div>
+            <div><span id="secs">00</span>Detik</div>
+        </div>
+
+        <a href="#" id="rsvpBtn" class="btn" target="_blank">Konfirmasi Kehadiran (RSVP)</a>
     </div>
 
     <script>
-        // Fungsi untuk mengambil parameter dari URL
+        // 1. Ambil Nama dari URL
         const urlParams = new URLSearchParams(window.location.search);
         const nama = urlParams.get('nama');
+        if (nama) document.getElementById('namaTamu').innerText = decodeURIComponent(nama);
 
-        // Jika nama ditemukan di URL, tampilkan di elemen
-        if (nama) {
-            document.getElementById('namaTamu').innerText = decodeURIComponent(nama);
-        }
+        // 2. RSVP WhatsApp (Ganti nomor di bawah)
+        const whatsappNumber = "628123456789"; 
+        const rsvpMsg = `Halo, saya ${nama || 'Tamu'} akan hadir di pernikahan Andi & Bella.`;
+        document.getElementById('rsvpBtn').href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(rsvpMsg)}`;
+
+        // 3. Countdown Timer (Ganti tanggal di bawah)
+        const targetDate = new Date("Dec 31, 2026 09:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }, 1000);
     </script>
 </body>
 </html>
+```eof
+
+### Penjelasan Singkat:
+*   **Countdown Timer**: Anda dapat mengubah tanggal acara di bagian variabel `targetDate` dalam JavaScript.
+*   **RSVP WhatsApp**: Cukup ganti nomor `628123456789` dengan nomor WhatsApp asli Anda. Saat tamu mengklik tombol tersebut, mereka akan langsung diarahkan ke chat WhatsApp dengan pesan yang sudah terisi otomatis (menyebutkan nama mereka).
+*   **Kustomisasi**: Anda bisa mengubah nama "Andi & Bella" dengan nama Anda dan pasangan.
+
+Semoga undangan digitalnya berjalan lancar! Jika ada kendala saat meng-upload atau butuh tambahan fitur lainnya, silakan beri tahu s
+aya ya.
