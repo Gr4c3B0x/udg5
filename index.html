@@ -10,11 +10,20 @@
         .page { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #fcf8f5; padding: 20px; box-sizing: border-box; }
         
         #cover { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; background: #fcf8f5; text-align: center; }
-        #undangan { display: none; text-align: center; overflow-y: auto; }
+        #undangan { display: none; text-align: center; overflow-y: auto; padding: 40px 20px; }
 
         h1 { font-family: 'Dancing Script', cursive; color: #8b5e3c; font-size: 2.5em; margin: 10px 0; }
         .pembuka { font-size: 0.95em; color: #555; max-width: 400px; margin: 15px 0; line-height: 1.6; }
         
+        .mempelai-container { margin: 20px 0; }
+        .nama-mempelai { font-family: 'Dancing Script', cursive; font-size: 1.8em; color: #8b5e3c; }
+        .orang-tua { font-size: 0.8em; color: #777; margin-bottom: 10px; }
+        
+        /* Detail Acara */
+        .info-acara { margin: 20px 0; background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); width: 100%; max-width: 350px; }
+        .info-acara p { margin: 5px 0; font-size: 0.9em; }
+        .bold { font-weight: 600; color: #8b5e3c; }
+
         .btn { padding: 15px 30px; background: #8b5e3c; color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1em; margin-top: 20px; }
         .nama-tamu { font-weight: 600; color: #8b5e3c; margin-bottom: 20px; }
         .timer { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
@@ -36,10 +45,24 @@
     <div id="undangan" class="page">
         <h1>Menuju Hari Bahagia</h1>
         
-        <!-- BAGIAN PEMBUKA -->
         <div class="pembuka">
-            "Assalamu’alaikum Warahmatullahi Wabarakatuh.<br><br>
+            "Assalamu’alaikum Warahmatullahi Wabarakatuh.<br>
             Tanpa mengurangi rasa hormat, izinkan kami mengundang Bapak/Ibu/Saudara/i untuk hadir di acara pernikahan kami."
+        </div>
+
+        <div class="mempelai-container">
+            <div class="nama-mempelai">Andi Pratama, S.T.</div>
+            <div class="orang-tua">Putra dari Bapak Budi & Ibu Ani</div>
+            <div style="font-family: 'Dancing Script'; font-size: 1.2em;">dan</div>
+            <div class="nama-mempelai">Bella Permata, S.E.</div>
+            <div class="orang-tua">Putri dari Bapak Cipto & Ibu Diana</div>
+        </div>
+
+        <!-- DETAIL ACARA -->
+        <div class="info-acara">
+            <p class="bold">📅 Sabtu, 31 Desember 2026</p>
+            <p class="bold">⏰ 09.00 WIB - Selesai</p>
+            <p>📍 Gedung Pertemuan Serbaguna, Jakarta</p>
         </div>
 
         <div class="timer" id="countdown">
@@ -47,23 +70,18 @@
             <div><span id="hours">00</span><br>Jam</div>
             <div><span id="mins">00</span><br>Menit</div>
         </div>
-        
-        <a href="#" id="rsvpBtn" class="btn" style="text-decoration:none;">Konfirmasi Kehadiran</a>
     </div>
 
     <script>
-        // 1. Ambil Nama
         const urlParams = new URLSearchParams(window.location.search);
         const nama = urlParams.get('nama');
         if (nama) document.getElementById('namaTamu').innerText = decodeURIComponent(nama);
 
-        // 2. Fungsi Buka Undangan
         function bukaUndangan() {
             document.getElementById('cover').style.display = 'none';
             document.getElementById('undangan').style.display = 'flex';
         }
 
-        // 3. Countdown
         const targetDate = new Date("Dec 31, 2026 09:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
@@ -72,12 +90,7 @@
             document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         }, 1000);
-
-        // 4. RSVP WhatsApp
-        const whatsappNumber = "628123456789"; 
-        const rsvpMsg = `Halo, saya ${nama || 'Tamu'} akan hadir di pernikahan Andi & Bella.`;
-        document.getElementById('rsvpBtn').href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(rsvpMsg)}`;
     </script>
-</body>
-
+</body
+    >
 </html>
