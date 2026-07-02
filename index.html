@@ -9,13 +9,12 @@
         body, html { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; height: 100%; }
         .page { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #fcf8f5; padding: 20px; box-sizing: border-box; }
         
-        /* Style Cover */
         #cover { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; background: #fcf8f5; text-align: center; }
-        
-        /* Style Undangan */
-        #undangan { display: none; text-align: center; }
+        #undangan { display: none; text-align: center; overflow-y: auto; }
 
-        h1 { font-family: 'Dancing Script', cursive; color: #8b5e3c; font-size: 3em; }
+        h1 { font-family: 'Dancing Script', cursive; color: #8b5e3c; font-size: 2.5em; margin: 10px 0; }
+        .pembuka { font-size: 0.95em; color: #555; max-width: 400px; margin: 15px 0; line-height: 1.6; }
+        
         .btn { padding: 15px 30px; background: #8b5e3c; color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1em; margin-top: 20px; }
         .nama-tamu { font-weight: 600; color: #8b5e3c; margin-bottom: 20px; }
         .timer { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
@@ -36,11 +35,19 @@
     <!-- HALAMAN UNDANGAN -->
     <div id="undangan" class="page">
         <h1>Menuju Hari Bahagia</h1>
+        
+        <!-- BAGIAN PEMBUKA -->
+        <div class="pembuka">
+            "Assalamu’alaikum Warahmatullahi Wabarakatuh.<br><br>
+            Tanpa mengurangi rasa hormat, izinkan kami mengundang Bapak/Ibu/Saudara/i untuk hadir di acara pernikahan kami."
+        </div>
+
         <div class="timer" id="countdown">
             <div><span id="days">00</span><br>Hari</div>
             <div><span id="hours">00</span><br>Jam</div>
             <div><span id="mins">00</span><br>Menit</div>
         </div>
+        
         <a href="#" id="rsvpBtn" class="btn" style="text-decoration:none;">Konfirmasi Kehadiran</a>
     </div>
 
@@ -56,7 +63,7 @@
             document.getElementById('undangan').style.display = 'flex';
         }
 
-        // 3. Countdown (Sama seperti sebelumnya)
+        // 3. Countdown
         const targetDate = new Date("Dec 31, 2026 09:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
@@ -72,4 +79,5 @@
         document.getElementById('rsvpBtn').href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(rsvpMsg)}`;
     </script>
 </body>
+
 </html>
